@@ -1,0 +1,88 @@
+export default {
+  name: 'product',
+  title: 'Product',
+  type: 'document',
+  fields: [
+    {
+      name: 'name',
+      title: 'Name',
+      type: 'string',
+      description: 'The name of the product (e.g., Nike Air Max).',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      description: 'SEO-friendly URL identifier for the product.',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      description: 'Detailed description of the product.',
+      validation: (Rule) => Rule.required().min(10).max(500),
+    },
+    {
+      name: 'price',
+      title: 'Price',
+      type: 'number',
+      description: 'Price of the product in USD.',
+      validation: (Rule) => Rule.required().positive(),
+    },
+    {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      description: 'Category of the shoe (e.g., Running, Lifestyle).',
+      options: {
+        list: [
+          { title: 'Running', value: 'running' },
+          { title: 'Lifestyle', value: 'lifestyle' },
+          { title: 'Basketball', value: 'basketball' },
+          { title: 'Training', value: 'training' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'sizes',
+      title: 'Available Sizes',
+      type: 'array',
+      description: 'Sizes available for this product.',
+      of: [{ type: 'number' }],
+      validation: (Rule) => Rule.min(1),
+    },
+    {
+      name: 'image',
+      title: 'Product Image',
+      type: 'image',
+      description: 'Main image of the product.',
+      options: {
+        hotspot: true,
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'stock',
+      title: 'Stock',
+      type: 'number',
+      description: 'Number of items available in stock.',
+      validation: (Rule) => Rule.required().min(0),
+    },
+    {
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      description: 'Tags or keywords for filtering (e.g., "lightweight", "high-top").',
+      of: [{ type: 'string' }],
+    },
+    {
+      name: 'releaseDate',
+      title: 'Release Date',
+      type: 'datetime',
+      description: 'The date when the product was or will be released.',
+    },
+  ],
+};
